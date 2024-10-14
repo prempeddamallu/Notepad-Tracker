@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad Tracker</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Notepad Tracker</h1>
+    <form id="noteForm" action="{{ url_for('save') }}" method="post">
+        <input type="hidden" name="filename" value="note.txt">
+        <textarea id="noteContent" name="content" rows="10" cols="50" placeholder="Write your note here..."></textarea>
+        <button type="submit">Save</button>
+    </form>
+    <script>
+        let timeout;
+        const noteContent = document.getElementById('noteContent');
+        noteContent.addEventListener('input', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                document.getElementById('noteForm').submit();
+            }, 2000);  // Save changes 2 seconds after typing stops
+        });
+    </script>
+</body>
+</html>
